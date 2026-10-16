@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Redline MD – Contract review for new physicians</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light; --paper:#F7F9FC; --surface:#FFFFFF; --ink:#13263A; --muted:#55657A; --line:#DDE2E8;
+  --red:#C32F27; --red-bg:#FBE9E7; --green:#1F6B4A; --green-bg:#E4F2EA; --navy:#13263A; --on-navy:#F2F5F8;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.55 "Public Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-weight:600;line-height:1.1;margin:0;letter-spacing:-.01em}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.logo{font-family:"Newsreader",Georgia,serif;font-weight:600;font-size:22px;text-decoration:none}
+.logo s{color:var(--red);text-decoration-thickness:2px}
+.hdr-link{font-size:15px;color:var(--muted);text-decoration:none}
+
+/* hero */
+.hero{display:grid;gap:32px;padding:24px 0 48px}
+h1{font-size:clamp(36px,9vw,64px)}
+.lede{font-size:19px;color:var(--muted);max-width:34em;margin:16px 0 0}
+.price-line{margin:18px 0 0;font-weight:600}
+.price-line span{color:var(--muted);font-weight:400}
+
+.drop{margin-top:22px;border:2px dashed var(--ink);border-radius:14px;background:var(--surface);padding:22px 18px;text-align:center}
+.drop.has-file{border-style:solid;border-color:var(--green)}
+.drop p{margin:0 0 14px;color:var(--muted);font-size:15px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;width:100%;padding:0 24px;border:0;border-radius:10px;background:var(--red);color:#fff;font:600 17px "Public Sans",sans-serif;cursor:pointer}
+.btn:hover{filter:brightness(.93)}
+.drop input{position:absolute;opacity:0;width:1px;height:1px}
+.fname{font-weight:600;margin-bottom:10px}
+.assure{display:flex;flex-wrap:wrap;gap:6px 18px;margin:14px 0 0;padding:0;list-style:none;font-size:14px;color:var(--muted)}
+.assure li::before{content:"✓ ";color:var(--green);font-weight:600}
+
+/* redline demo */
+.doc{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:20px;box-shadow:0 12px 32px -18px rgba(19,38,58,.35)}
+.doc-h{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:14px}
+.doc p{font-family:"Newsreader",Georgia,serif;font-size:18px;line-height:1.6;margin:0 0 14px}
+del{color:var(--red);background:var(--red-bg);text-decoration-thickness:2px}
+ins{color:var(--green);background:var(--green-bg);text-decoration:none;font-weight:500}
+.flag{display:flex;gap:10px;align-items:flex-start;font-size:14px;background:var(--red-bg);border-left:4px solid var(--red);padding:10px 12px;border-radius:0 6px 6px 0}
+.flag b{display:block}
+
+/* ROI */
+.roi{background:#E6EDF6;color:var(--ink);padding:56px 0}
+.roi h2{font-size:clamp(30px,6.5vw,46px);max-width:16em}
+.roi .sub{color:var(--muted);max-width:36em;margin:14px 0 32px}
+.cmp{display:grid;gap:14px}
+.card{border-radius:12px;padding:22px;border:1px solid var(--line);background:var(--surface)}
+.card.us{background:var(--navy);color:var(--on-navy);border-color:transparent}
+.card h3{font-size:20px;font-family:"Public Sans",sans-serif;font-weight:600}
+.big{font-family:"Newsreader",Georgia,serif;font-size:52px;font-weight:600;line-height:1;margin:10px 0 4px}
+.card.them .big{text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:3px;opacity:.85}
+.card ul{margin:14px 0 0;padding-left:18px;color:inherit;font-size:15px}
+.card.them ul{color:var(--muted)}
+.trap{margin-top:14px;border-radius:12px;padding:22px;background:var(--red-bg);border:1px solid #EBC3BE}
+.trap .big{color:var(--red)}
+.trap p{margin:0;color:var(--ink);max-width:44em}
+.cta-row{margin-top:28px;max-width:420px}
+.cta-row .btn{background:var(--red);color:#fff}
+footer.wrap{padding-top:28px;padding-bottom:110px;font-size:13px;color:var(--muted)}
+
+/* how it works */
+section.sec{padding-top:48px;padding-bottom:48px}
+.sec h2{font-size:clamp(28px,6vw,42px);max-width:18em}
+.sec .sub{color:var(--muted);max-width:36em;margin:12px 0 28px}
+.steps{display:grid;gap:22px;margin:0;padding:0;list-style:none}
+.steps h3{font-family:"Public Sans",sans-serif;font-size:18px;font-weight:600;margin:14px 0 4px}
+.steps p{margin:0;color:var(--muted);font-size:16px}
+.shot{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;font-size:13px;min-height:230px;box-shadow:0 10px 26px -18px rgba(19,38,58,.35)}
+.shot .bar{display:flex;justify-content:space-between;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:12px}
+.mini-drop{border:2px dashed var(--line);border-radius:10px;padding:26px 10px;text-align:center;color:var(--muted)}
+.mini-drop b{display:block;color:var(--green);margin-bottom:4px}
+.mini-btn{margin-top:12px;background:var(--red);color:#fff;border-radius:8px;text-align:center;padding:10px;font-weight:600}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border:0}
+.tag{font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px}
+.tag.hi{background:var(--red-bg);color:var(--red)}
+.tag.md{background:#FFF1D6;color:#8A5A00}
+.tag.ok{background:var(--green-bg);color:var(--green)}
+.shot p.cl{font-family:"Newsreader",Georgia,serif;font-size:15px;line-height:1.55;margin:0 0 10px}
+.note{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px 10px;color:var(--muted)}
+/* testimonials + faq */
+.quotes{display:grid;gap:14px}
+.quote{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px}
+.quote p{font-family:"Newsreader",Georgia,serif;font-size:20px;line-height:1.4;margin:0 0 14px}
+.quote span{font-size:14px;color:var(--muted)}
+.quote .save{display:inline-block;margin-bottom:12px;font-size:13px;font-weight:600;color:var(--green);background:var(--green-bg);padding:2px 10px;border-radius:99px}
+details{border-bottom:1px solid var(--line);padding:4px 0}
+summary{cursor:pointer;font-weight:600;padding:16px 0;list-style:none;display:flex;justify-content:space-between;gap:16px;min-height:48px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:22px;line-height:1;color:var(--red)}
+details[open] summary::after{content:"–"}
+details p{margin:0 0 18px;color:var(--muted);max-width:42em}
+section.sec.final{text-align:center;padding-top:40px;padding-bottom:56px}
+.final h2{margin:0 auto 18px}
+.final .btn{max-width:360px}
+@media (min-width:860px){.steps{grid-template-columns:repeat(3,1fr);gap:28px}.quotes{grid-template-columns:repeat(3,1fr)}section.sec{padding-top:72px;padding-bottom:72px}}
+/* sticky mobile CTA */
+.sticky{position:fixed;left:0;right:0;bottom:0;padding:10px 20px calc(10px + env(safe-area-inset-bottom,0px));background:var(--paper);border-top:1px solid var(--line);z-index:5;display:flex;gap:12px;align-items:center}
+.sticky small{font-size:13px;line-height:1.25;color:var(--muted);flex:1}
+.sticky .btn{width:auto;min-height:48px;padding:0 20px}
+
+@media (min-width:860px){
+  body{font-size:18px}
+  .wrap{padding:0 32px}
+  .hero{grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding:56px 0 80px}
+  .btn{width:auto}
+  .drop{display:flex;align-items:center;justify-content:space-between;gap:18px;text-align:left;padding:18px 20px}
+  .drop p{margin:0}
+  .cmp{grid-template-columns:1fr 1.15fr}
+  .trap{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+  .sticky{display:none}
+  footer.wrap{padding-bottom:40px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .doc del{animation:strike .9s .4s both}
+  @keyframes strike{from{background-size:0}to{background-size:100%}}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="logo" href="#"><s>Redline</s> MD</a>
+    <a class="hdr-link" href="#how">See a sample review</a>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div>
+        <h1>Don’t sign your first contract without a second opinion.</h1>
+        <p class="lede">Upload your employment agreement. In minutes, get a redlined copy that flags tail coverage, non-competes and termination terms, written for physicians.</p>
+        <p class="price-line">$199 flat. <span>A traditional attorney review starts at $500.</span></p>
+
+        <div class="drop" id="drop">
+          <div>
+            <div class="fname" id="fname" hidden></div>
+            <p id="hint">PDF or Word. Takes about 30 seconds.</p>
+          </div>
+          <label class="btn" id="pick" tabindex="0">Upload my contract
+            <input type="file" id="file" accept=".pdf,.doc,.docx">
+          </label>
+        </div>
+        <ul class="assure">
+          <li>Encrypted upload</li>
+          <li>Never shared or sold</li>
+          <li>Pay only after you see the flags</li>
+        </ul>
+      </div>
+
+      <div class="doc" id="how" aria-label="Sample redlined clause">
+        <div class="doc-h"><span>Employment Agreement · §14.2</span><span>3 changes proposed</span></div>
+        <p>Upon termination for any reason, Physician shall <del>purchase tail coverage at Physician’s sole expense</del> <ins>be covered by Employer-paid tail coverage</ins>, and the non-compete shall extend <del>five (5) years within a 50-mile radius</del> <ins>one (1) year within a 15-mile radius</ins>.</p>
+        <div class="flag"><span aria-hidden="true">⚑</span><span><b>Tail coverage can cost $10,000+</b>As written, you would pay it when you leave.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<section class="sec wrap" id="product">
+  <h2>From upload to a redlined contract in three steps.</h2>
+  <p class="sub">No account setup, no scheduling. Everything below happens in one session.</p>
+  <ol class="steps">
+    <li>
+      <div class="shot" aria-hidden="true"><div class="bar"><span>Upload</span><span>Step 1 of 3</span></div><div class="mini-drop"><b>✓ employment_agreement.pdf</b>42 pages · uploaded securely</div><div class="mini-btn">Review my contract</div></div>
+      <h3>1. Upload your contract</h3><p>Drop in the PDF or Word file your employer sent you.</p>
+    </li>
+    <li>
+      <div class="shot" aria-hidden="true"><div class="bar"><span>Flagged clauses</span><span>4 found</span></div>
+        <div class="row"><span>Tail coverage</span><span class="tag hi">High risk</span></div>
+        <div class="row"><span>Non-compete</span><span class="tag hi">High risk</span></div>
+        <div class="row"><span>Termination without cause</span><span class="tag md">Review</span></div>
+        <div class="row"><span>Compensation terms</span><span class="tag ok">Standard</span></div></div>
+      <h3>2. See what’s risky</h3><p>Each clause is rated and explained in plain English, in physician terms.</p>
+    </li>
+    <li>
+      <div class="shot" aria-hidden="true"><div class="bar"><span>§14.2 Tail coverage</span><span>Suggested edit</span></div><p class="cl">Physician shall <del>purchase tail coverage at Physician’s sole expense</del> <ins>be covered by Employer-paid tail coverage</ins>.</p><div class="note">Employer-paid tail is common for employed physicians. Ask for it before you sign.</div></div>
+      <h3>3. Send your redlines</h3><p>Download the marked-up contract and the language to negotiate with.</p>
+    </li>
+  </ol>
+</section>
+
+<section class="roi" id="roi">
+  <div class="wrap">
+    <h2>One clause can cost more than the whole review.</h2>
+    <p class="sub">Most new physicians sign without negotiating. The terms below are the ones that follow you to your next job.</p>
+
+    <div class="cmp">
+      <div class="card them">
+        <h3>Attorney review</h3>
+        <div class="big">$500+</div>
+        <ul><li>Days to schedule and return</li><li>Hourly billing, extra fees for revisions</li></ul>
+      </div>
+      <div class="card us">
+        <h3>Redline MD</h3>
+        <div class="big">$199</div>
+        <ul><li>Redlined contract in minutes</li><li>Plain-English notes on every flagged clause</li><li>Suggested language you can send to your employer</li></ul>
+      </div>
+    </div>
+
+    <div class="trap">
+      <div class="big">$10,000+</div>
+      <p>The cost of tail insurance you may owe on departure if your contract doesn’t say the employer pays. Redline MD checks for it first.</p>
+    </div>
+
+    <div class="cta-row"><label class="btn" onclick="document.getElementById('file').click()" tabindex="0">Upload my contract</label></div>
+  </div>
+</section>
+
+<section class="sec wrap" id="results">
+  <h2>Physicians who asked before they signed.</h2>
+  <p class="sub">Sample testimonials for design purposes.</p>
+  <div class="quotes">
+    <figure class="quote" style="margin:0"><span class="save">Employer-paid tail</span><p>“I had no idea my tail coverage was on me. One email and it was removed.”</p><span>Dr. A.R., Internal Medicine</span></figure>
+    <figure class="quote" style="margin:0"><span class="save">Non-compete cut to 1 year</span><p>“Five years and 50 miles. I would have signed it as is.”</p><span>Dr. M.S., Emergency Medicine</span></figure>
+    <figure class="quote" style="margin:0"><span class="save">Done in one evening</span><p>“Cheaper than one billable hour, and I could read every note myself.”</p><span>Dr. J.T., Pediatrics</span></figure>
+  </div>
+</section>
+
+<section class="sec wrap" id="faq">
+  <h2>Questions doctors ask first.</h2>
+  <div style="margin-top:24px;max-width:760px">
+    <details><summary>Is this legal advice?</summary><p>No. Redline MD is an AI review tool that flags terms and suggests edits. For legal advice, consult a licensed attorney.</p></details>
+    <details><summary>Is my contract kept private?</summary><p>Your file is encrypted in transit and used only to produce your review. You can ask us to delete it at any time.</p></details>
+    <details><summary>What does the $199 include?</summary><p>One full contract review: flagged clauses, plain-English explanations, a redlined document and suggested negotiation language.</p></details>
+    <details><summary>What is tail coverage and why does it matter?</summary><p>It covers claims filed after you leave a job. If your contract makes you pay for it, the bill can exceed $10,000.</p></details>
+    <details><summary>How long does it take?</summary><p>Most reviews are ready within minutes of uploading.</p></details>
+  </div>
+</section>
+
+<section class="sec wrap final"><h2>Read it before you sign it.</h2><label class="btn" onclick="document.getElementById('file').click()" tabindex="0">Upload my contract</label></section>
+
+<footer class="wrap">Redline MD provides AI-generated analysis, not legal advice. Placeholder copy and claims for design purposes.</footer>
+
+<div class="sticky" id="sticky">
+  <small><b>$199</b> vs $500+ attorney fee</small>
+  <button class="btn" onclick="document.getElementById('file').click()">Upload contract</button>
+</div>
+
+<script>
+(function(){
+  var f=document.getElementById('file'),d=document.getElementById('drop'),n=document.getElementById('fname'),h=document.getElementById('hint'),p=document.getElementById('pick');
+  f.addEventListener('change',function(){
+    if(!f.files.length)return;
+    d.classList.add('has-file');n.hidden=false;n.textContent=f.files[0].name;
+    h.textContent='Ready. Review is $199, charged after you see your flags.';
+    p.firstChild.nodeValue='Review my contract ';
+  });
+  document.querySelectorAll('label.btn[tabindex]').forEach(function(l){
+    l.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();f.click()}});
+  });
+})();
+</script>
+</body>
+</html>
